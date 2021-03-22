@@ -1,16 +1,20 @@
 #include <M5Core2.h>
 
-// the setup routine runs once when M5Stack starts up
-void setup(){
 
-  // Initialize the M5Stack object
+void circle(Point p, uint16_t c) {
+  M5.Lcd.drawCircle(p.x, p.y, 50, c);
+  M5.Lcd.drawCircle(p.x, p.y, 52, c);
+}
+
+void setup() {
   M5.begin();
-
-  // LCD display
-  M5.Lcd.print("Hello world!");
+  M5.Lcd.fillScreen(WHITE);
 }
 
-// the loop routine runs over and over again forever
 void loop() {
-    M5.update();
+  M5.update();
+  Event& e = M5.Buttons.event;
+  if (e & (E_MOVE | E_RELEASE)) circle(e & E_MOVE ? e.from : e.to, WHITE);
+  if (e & (E_TOUCH | E_MOVE)) circle(e.to, e.finger ? BLUE : RED);
 }
+
