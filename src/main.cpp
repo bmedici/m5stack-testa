@@ -1,16 +1,15 @@
 #include <M5Core2.h>
+#include "Free_Fonts.h"
 
-// the setup routine runs once when M5Stack starts up
-void setup(){
-
-  // Initialize the M5Stack object
-  M5.begin();
-
-  // LCD display
-  M5.Lcd.print("Hello world!");
+void setup() {
+  M5.begin(true);
+  // M5.Lcd.setFreeFont(TT1);
+  M5.Lcd.print("BLAH");
 }
 
-// the loop routine runs over and over again forever
 void loop() {
-    M5.update();
+   M5.Axp.SetLed(true);
+   delay(50);
+   M5.Axp.SetLed(false);
+   delay(900);
 }
